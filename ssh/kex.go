@@ -512,6 +512,10 @@ func (kex *curve25519sha256) Server(c packetConn, rand io.Reader, magics *handsh
 		return nil, errors.New("ssh: peer's curve25519 public value has wrong order")
 	}
 
+	if (priv == nil) {
+		return nil, errors.New("ssh: priv is nil")
+	}
+
 	hostKeyBytes := priv.PublicKey().Marshal()
 
 	h := crypto.SHA256.New()
